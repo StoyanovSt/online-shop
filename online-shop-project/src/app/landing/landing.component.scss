@@ -1,0 +1,12 @@
+.landing-wrapper {
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-between;
+
+  .item {
+    display: flex;
+  }
+}

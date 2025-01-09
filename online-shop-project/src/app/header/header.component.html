@@ -1,4 +1,12 @@
 <div class="header-wrapper">
   <div class="banner">Healthy world</div>
-  <div class="profile-section"></div>
+  <div class="profile-section">
+    <ng-container *ngIf="isAuthenticated$ | async; else loginTemplate">
+      Welcome
+    </ng-container>
+    <ng-template #loginTemplate>
+      <button type="button" class="btn btn-header" routerLink='/user/register'>Register</button>
+      <button type="button" class="btn btn-header" routerLink='/user/login'>Login</button>
+    </ng-template>
+  </div>
 </div>

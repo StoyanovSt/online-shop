@@ -129,7 +129,7 @@ export const items: Item[] = [
       email: 'info@silverdewaparies.com',
     },
     price: 15.5436,
-    isPublic: false,
+    isPublic: true,
   },
   {
     id: generateUniqueId(),

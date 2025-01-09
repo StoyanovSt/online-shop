@@ -3,11 +3,13 @@ import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

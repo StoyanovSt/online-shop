@@ -1,5 +1,5 @@
 <div class="landing-wrapper">
-  @for (item of (dataService.getItems() | async); track item.id) {
+  @for (item of publicItems$ | async; track item.id) {
   <app-item-component class="item" [item]="item"></app-item-component>
   }
 </div>

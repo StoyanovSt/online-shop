@@ -1,0 +1,77 @@
+@import "../../shared/styles/colors.scss";
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $background-color;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+div {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 0.8rem;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: $text-color;
+  background-color: #f8f8f8;
+
+  &::placeholder {
+    color: #b0b0b0;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    background-color: #ffffff;
+  }
+}
+
+span {
+  color: $error-color;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+button[type="button"] {
+  padding: 1rem;
+  background-color: $primary-color;
+  color: $background-color;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 5%);
+  }
+
+  &:disabled {
+    background-color: $border-color;
+    cursor: not-allowed;
+  }
+}
+
+label {
+  font-size: 1rem;
+  color: $text-color;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  text-align: center;
+  color: $primary-color;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}

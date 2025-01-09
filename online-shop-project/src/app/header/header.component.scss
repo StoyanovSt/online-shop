@@ -1,10 +1,12 @@
+@import "../shared/styles/colors.scss";
+
 .header-wrapper {
   width: 100%;
   padding: 25px;
   display: flex;
   align-items: baseline;
   color: #fff;
-  background: linear-gradient(90deg, #f7d62f, #ff6347);
+  background: linear-gradient(90deg, #f7d62f, $primary-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 3rem;
 

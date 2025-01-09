@@ -1,11 +1,13 @@
+@import "../../../shared/styles/colors.scss";
+
 .item-wrapper {
   max-width: 300px;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  background-color: #fff;
+  background-color: $background-color;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 25px;
   padding-bottom: 25px;
@@ -37,7 +39,7 @@
   .item-title {
     font-size: 1.25rem;
     font-weight: bold;
-    color: #333;
+    color: $text-color;
   }
 
   .item-description {

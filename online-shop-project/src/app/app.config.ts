@@ -11,6 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(),
-    provideState({ name: 'auth', reducer: authReducer }),
+    provideState({ name: 'authState', reducer: authReducer }),
   ],
 };

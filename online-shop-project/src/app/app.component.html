@@ -1,3 +1,8 @@
-<app-header></app-header>
-<router-outlet />
-<app-footer></app-footer>
+<ng-container *ngIf="loadingService.loading$ | async; else loaded">
+  <app-loading-spinner></app-loading-spinner>
+</ng-container>
+<ng-template #loaded>
+  <app-header></app-header>
+  <router-outlet />
+  <app-footer></app-footer>
+</ng-template>

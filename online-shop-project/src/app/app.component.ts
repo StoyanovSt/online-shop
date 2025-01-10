@@ -1,8 +1,11 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { CommonModule } from '@angular/common';
 
 import { AuthService } from './services/auth.service';
+import { LoadingService } from './services/loading.service';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppState } from './states/app.state';
@@ -14,7 +17,7 @@ import { map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, LoadingSpinnerComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -23,6 +26,7 @@ export class AppComponent implements OnDestroy {
   private router: Router = inject(Router);
   private authSub: Subscription | null = null;
   private store = inject(Store<AppState>);
+  loadingService = inject(LoadingService);
 
   constructor() {
     this.authSub = this.authService

@@ -3,6 +3,9 @@
 </ng-container>
 <ng-template #loaded>
   <app-header></app-header>
-  <router-outlet />
+  <app-alert></app-alert>
+  <div class="main-wrapper">
+    <router-outlet />
+  </div>
   <app-footer></app-footer>
 </ng-template>

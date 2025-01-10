@@ -16,6 +16,9 @@ import { JWT_KEY } from '../../shared/constants/constants';
 import { LoadingService } from '../../services/loading.service';
 import { AppState } from '../../states/app.state';
 import { setIsAuth } from '../../states/auth/auth.actions';
+import { AlertService } from '../../services/alert.service';
+import { AlertTypeEnum } from '../../shared/enums/alert.enum';
+import { AlertInterface } from '../../shared/models/alert.interface';
 
 import { catchError, delay, finalize, of, Subject, takeUntil, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -27,11 +30,12 @@ import { Store } from '@ngrx/store';
 })
 export class RegisterComponent implements OnDestroy {
   private destroyRegSub$ = new Subject<void>();
-  
+
   private fb: FormBuilder = inject(FormBuilder);
   private loadingService = inject(LoadingService);
   private router: Router = inject(Router);
   private store = inject(Store<AppState>);
+  private alertService = inject(AlertService);
 
   isPasswordVisible = signal<boolean>(false);
   isRePasswordVisible = signal<boolean>(false);
@@ -52,19 +56,6 @@ export class RegisterComponent implements OnDestroy {
     });
 
     this.registerForm.setValidators(this.passwordsMatchValidator());
-  }
-
-  private passwordsMatchValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const password = this.registerForm.get('password')?.value.trim().toLowerCase();
-      const rePassword = this.registerForm.get('rePassword')?.value.trim().toLowerCase();
-
-      if (password && rePassword && password !== rePassword) {
-        this.registerForm.get('rePassword')?.setErrors({ passwordMismatch: true });
-      }
-
-      return null;
-    };
   }
 
   get emailControl() {
@@ -100,21 +91,51 @@ export class RegisterComponent implements OnDestroy {
     this.loadingService.showLoadingSpinner();
     of(userData)
       .pipe(
-        delay(2000),
+        delay(1000),
         tap(() => {
-          //add notification
           localStorage.setItem(JWT_KEY, userData.email);
           this.store.dispatch(setIsAuth({ isAuth: true }));
           this.router.navigate(['/home']);
+          setTimeout(() => {
+            this.setAlert({
+              type: AlertTypeEnum.success,
+              text: 'Successful registration!'
+            });
+          }, 250);
         }),
         catchError(err => {
-          //add notification
           console.error(err);
+          setTimeout(() => {
+            this.setAlert({
+              type: AlertTypeEnum.danger,
+              text: 'Something went wrong!'
+            });
+          }, 250);          
           return of(null)
         }),
         finalize(() => this.loadingService.hideLoadingSpinner()),
         // takeUntil(this.destroyRegSub$) //TO DO: fix
       ).subscribe();
+  }
+
+  private passwordsMatchValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = this.registerForm.get('password')?.value.trim().toLowerCase();
+      const rePassword = this.registerForm.get('rePassword')?.value.trim().toLowerCase();
+
+      if (password && rePassword && password !== rePassword) {
+        this.registerForm.get('rePassword')?.setErrors({ passwordMismatch: true });
+      }
+
+      return null;
+    };
+  }
+
+  private setAlert(alert: AlertInterface): void {
+    this.alertService.setAlert({
+      type: alert.type,
+      text: alert.text
+    });
   }
 
   ngOnDestroy(): void {

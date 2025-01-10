@@ -20,7 +20,17 @@
     cursor: pointer;
   }
 
-  .profile-section {
+  .profile-section,
+  .login-section {
     flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .user-account {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 1rem;
   }
 }

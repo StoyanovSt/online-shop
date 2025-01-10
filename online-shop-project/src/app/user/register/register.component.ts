@@ -14,8 +14,11 @@ import {
 
 import { JWT_KEY } from '../../shared/constants/constants';
 import { LoadingService } from '../../services/loading.service';
+import { AppState } from '../../states/app.state';
+import { setIsAuth } from '../../states/auth/auth.actions';
 
 import { catchError, delay, finalize, of, Subject, takeUntil, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 @Component({
   standalone: true,
   templateUrl: './register.component.html',
@@ -24,12 +27,16 @@ import { catchError, delay, finalize, of, Subject, takeUntil, tap } from 'rxjs';
 })
 export class RegisterComponent implements OnDestroy {
   private destroyRegSub$ = new Subject<void>();
+  
   private fb: FormBuilder = inject(FormBuilder);
   private loadingService = inject(LoadingService);
   private router: Router = inject(Router);
-  registerForm!: FormGroup;
+  private store = inject(Store<AppState>);
+
   isPasswordVisible = signal<boolean>(false);
   isRePasswordVisible = signal<boolean>(false);
+
+  registerForm!: FormGroup;
 
   constructor() {
     this.registerForm = this.fb.group({
@@ -97,6 +104,7 @@ export class RegisterComponent implements OnDestroy {
         tap(() => {
           //add notification
           localStorage.setItem(JWT_KEY, userData.email);
+          this.store.dispatch(setIsAuth({ isAuth: true }));
           this.router.navigate(['/home']);
         }),
         catchError(err => {
@@ -105,7 +113,7 @@ export class RegisterComponent implements OnDestroy {
           return of(null)
         }),
         finalize(() => this.loadingService.hideLoadingSpinner()),
-        // takeUntil(this.destroyRegSub$)
+        // takeUntil(this.destroyRegSub$) //TO DO: fix
       ).subscribe();
   }
 

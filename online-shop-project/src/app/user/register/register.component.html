@@ -23,12 +23,13 @@
   <div>
     <label for="password">
       <input
-        type="password"
+        [type]="!isPasswordVisible() ? 'password' : 'text'"
         id="password"
         formControlName="password"
         placeholder="Password"
         (blur)="onBlur('password')"
       />
+      <mat-icon (click)="togglePasswordVisibility()">{{!isPasswordVisible() ? 'visibility' : 'visibility_off'}}</mat-icon>
     </label>
     @if(passwordControl?.touched && passwordControl?.invalid){ 
       @if(passwordControl?.errors?.["required"]){
@@ -42,12 +43,13 @@
   <div>
     <label for="rePassword">
       <input
-        type="password"
+        [type]="!isRePasswordVisible() ? 'password' : 'text'"
         id="rePassword"
         formControlName="rePassword"
         placeholder="Retype password"
         (blur)="onBlur('rePassword')"
       />
+      <mat-icon (click)="toggleRePasswordVisibility()">{{!isRePasswordVisible() ? 'visibility' : 'visibility_off'}}</mat-icon>
     </label>
     @if(rePasswordControl?.touched && rePasswordControl?.invalid){ 
       @if(rePasswordControl?.errors?.["required"]){

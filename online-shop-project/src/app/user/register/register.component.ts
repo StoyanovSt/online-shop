@@ -1,4 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import {
   AbstractControl,
   FormBuilder,
@@ -12,11 +14,13 @@ import {
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatIconModule, CommonModule],
 })
 export class RegisterComponent {
   private fb: FormBuilder = inject(FormBuilder);
   registerForm!: FormGroup;
+  isPasswordVisible = signal<boolean>(false);
+  isRePasswordVisible = signal<boolean>(false);
 
   constructor() {
     this.registerForm = this.fb.group({
@@ -65,6 +69,14 @@ export class RegisterComponent {
       control.markAsTouched();
       control.updateValueAndValidity();
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible.update(prev => !prev);
+  }
+
+  toggleRePasswordVisibility(): void {
+    this.isRePasswordVisible.update(prev => !prev);
   }
 
   onRegister(): void {}

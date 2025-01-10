@@ -79,5 +79,8 @@ export class RegisterComponent {
     this.isRePasswordVisible.update(prev => !prev);
   }
 
-  onRegister(): void {}
+  onRegister(): void {
+    const userData = this.registerForm.getRawValue();
+    
+  }
 }

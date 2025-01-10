@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import {
   AbstractControl,
@@ -10,14 +11,22 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+
+import { JWT_KEY } from '../../shared/constants/constants';
+import { LoadingService } from '../../services/loading.service';
+
+import { catchError, delay, finalize, of, Subject, takeUntil, tap } from 'rxjs';
 @Component({
   standalone: true,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
   imports: [ReactiveFormsModule, MatIconModule, CommonModule],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
+  private destroyRegSub$ = new Subject<void>();
   private fb: FormBuilder = inject(FormBuilder);
+  private loadingService = inject(LoadingService);
+  private router: Router = inject(Router);
   registerForm!: FormGroup;
   isPasswordVisible = signal<boolean>(false);
   isRePasswordVisible = signal<boolean>(false);
@@ -81,6 +90,27 @@ export class RegisterComponent {
 
   onRegister(): void {
     const userData = this.registerForm.getRawValue();
-    
+    this.loadingService.showLoadingSpinner();
+    of(userData)
+      .pipe(
+        delay(2000),
+        tap(() => {
+          //add notification
+          localStorage.setItem(JWT_KEY, userData.email);
+          this.router.navigate(['/home']);
+        }),
+        catchError(err => {
+          //add notification
+          console.error(err);
+          return of(null)
+        }),
+        finalize(() => this.loadingService.hideLoadingSpinner()),
+        // takeUntil(this.destroyRegSub$)
+      ).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyRegSub$.next();
+    this.destroyRegSub$.complete();
   }
 }

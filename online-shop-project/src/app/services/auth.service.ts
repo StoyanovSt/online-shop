@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { JWT_KEY } from '../shared/constants/constants';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private JWT_KEY: string = 'auth_token';
-
   public isAuthenticated(): Observable<boolean> {
-    return of<boolean>(Boolean(localStorage.getItem(this.JWT_KEY)));
+    return of<boolean>(Boolean(localStorage.getItem(JWT_KEY)));
   }
 }

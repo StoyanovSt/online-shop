@@ -7,16 +7,17 @@
         id="email"
         formControlName="email"
         placeholder="Email"
+        (blur)="onBlur('email')"
       />
     </label>
-    @if(registerForm.controls["email"].invalid &&
-    (registerForm.controls["email"].touched ||
-    registerForm.controls["email"].dirty)){
-    @if(registerForm.controls["email"].errors?.["required"]){
-    <span>*Email is required!</span>
-    } @if(registerForm.controls["email"].errors?.["email"]){
-    <span>*Email is invalid!</span>
-    } }
+    @if(emailControl?.touched && emailControl?.invalid){ 
+      @if(emailControl?.errors?.["required"]){
+        <span>*Field is required!</span>
+      }
+      @if(emailControl?.errors?.["email"]){
+        <span>*Email is invalid!</span>
+      }  
+    }
   </div>
 
   <div>
@@ -26,18 +27,41 @@
         id="password"
         formControlName="password"
         placeholder="Password"
+        (blur)="onBlur('password')"
       />
     </label>
-    @if(registerForm.controls["password"].invalid &&
-    (registerForm.controls["password"].touched ||
-    registerForm.controls["password"].dirty)){
-    @if(registerForm.controls["password"].errors?.["required"]){
-    <span>*Password is required!</span>
-    } @if(registerForm.controls["password"].errors?.["minlength"]){
-    <span>*Password must be at least 6 characters long!</span>
-    } }
+    @if(passwordControl?.touched && passwordControl?.invalid){ 
+      @if(passwordControl?.errors?.["required"]){
+        <span>*Field is required!</span>
+      }
+      @if(passwordControl?.errors?.["minlength"]){
+        <span>*Password must be atleast 6 characters!</span>
+      }  
+    }
   </div>
   <div>
-    <button type="button" (click)="onRegister()">Submit</button>
+    <label for="rePassword">
+      <input
+        type="password"
+        id="rePassword"
+        formControlName="rePassword"
+        placeholder="Retype password"
+        (blur)="onBlur('rePassword')"
+      />
+    </label>
+    @if(rePasswordControl?.touched && rePasswordControl?.invalid){ 
+      @if(rePasswordControl?.errors?.["required"]){
+        <span>*Field is required!</span>
+      } 
+      @if(rePasswordControl?.errors?.["minlength"]){
+        <span>*Password must be atleast 6 characters!</span>
+      }
+      @if(rePasswordControl?.errors?.["passwordMismatch"]){
+        <span>*Passwords do not match!</span>
+      }
+    }
+  </div>
+  <div>
+    <button type="button" [disabled]="registerForm.invalid" (click)="onRegister()">Register</button>
   </div>
 </form>

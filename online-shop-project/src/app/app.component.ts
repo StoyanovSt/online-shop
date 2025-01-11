@@ -18,7 +18,14 @@ import { map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, LoadingSpinnerComponent, CommonModule, AlertComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    LoadingSpinnerComponent,
+    CommonModule,
+    AlertComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -34,9 +41,9 @@ export class AppComponent implements OnDestroy {
       .isAuthenticated()
       .pipe(
         tap((isAuth: boolean) => this.store.dispatch(setIsAuth({ isAuth }))),
-        map((isAuth: boolean) =>
-          isAuth ? this.router.navigate(['/home']) : this.router.navigate(['/'])
-        )
+        map((isAuth: boolean) => {
+          if (!isAuth) this.router.navigate(['/']);
+        })
       )
       .subscribe();
   }

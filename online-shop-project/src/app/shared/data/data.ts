@@ -18,6 +18,7 @@ export const items: Item[] = [
     },
     price: 14.9459,
     isPublic: false,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -32,6 +33,7 @@ export const items: Item[] = [
     },
     price: 16.4932,
     isPublic: true,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -46,6 +48,7 @@ export const items: Item[] = [
     },
     price: 12.9559,
     isPublic: false,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -60,6 +63,7 @@ export const items: Item[] = [
     },
     price: 18.9659,
     isPublic: false,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -74,6 +78,7 @@ export const items: Item[] = [
     },
     price: 13.4789,
     isPublic: true,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -88,6 +93,7 @@ export const items: Item[] = [
     },
     price: 20.4944,
     isPublic: false,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -102,6 +108,7 @@ export const items: Item[] = [
     },
     price: 17.3254,
     isPublic: true,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -116,6 +123,7 @@ export const items: Item[] = [
     },
     price: 22.4535,
     isPublic: false,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -130,6 +138,7 @@ export const items: Item[] = [
     },
     price: 15.5436,
     isPublic: true,
+    isAddedToCart: false,
   },
   {
     id: generateUniqueId(),
@@ -144,5 +153,6 @@ export const items: Item[] = [
     },
     price: 25.3464,
     isPublic: true,
+    isAddedToCart: false,
   },
 ];

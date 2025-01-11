@@ -1,9 +1,9 @@
 <div class="header-wrapper">
-  <div class="banner" routerLink="/">Healthy world</div>
-  <div class="profile-section" *ngIf="isAuthenticated$ | async; else loginSection">
+  <div class="banner" [routerLink]="isAuth ? '/home' : '/'">Healthy world</div>
+  <div class="profile-section" *ngIf="isAuth; else loginSection">
     <div class="user-account">Welcome {{ userEmail() }}</div>
     <div class="cart">
-      <mat-icon>shopping_cart</mat-icon>
+      <mat-icon routerLink="/cart">shopping_cart</mat-icon>
       <span class="number-of-items">{{ (items$ | async)?.length || 0 }}</span>
     </div>
     <button type="button" class="btn btn-header" (click)="logout()">Logout</button>

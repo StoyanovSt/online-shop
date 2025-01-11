@@ -1,5 +1,5 @@
 <div class="home-wrapper">
-  @for (item of (dataService.getItems() | async); track item.id) {
-  <app-item-component class="item" [item]="item"></app-item-component>
+  @for (item of (items$ | async); track item.id) {
+  <app-item-component class="item" [item]="item" (itemId)="onAddItemToCart($event)"></app-item-component>
   }
 </div>

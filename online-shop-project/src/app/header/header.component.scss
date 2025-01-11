@@ -37,5 +37,14 @@
 
   .cart {
     display: flex;
+
+    .number-of-items {
+      margin-left: 0.25rem;
+      margin-right: 0.5rem;
+    }
+
+    mat-icon {
+      cursor: pointer;
+    }
   }
 }

@@ -1,0 +1,5 @@
+<div class="cart-wrapper">
+    @for (item of items$ | async; track item.id) {
+        <app-item-component [item]="item"></app-item-component>
+    }
+</div>

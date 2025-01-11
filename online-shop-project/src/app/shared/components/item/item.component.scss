@@ -1,4 +1,5 @@
 @import "../../../shared/styles/colors.scss";
+$secondary-text-color: #666;
 
 .item-wrapper {
   max-width: 300px;
@@ -43,16 +44,19 @@
 
   .item-description {
     font-size: 1rem;
-    color: #666;
+    color: $secondary-text-color;
     line-height: 1.5;
   }
 
-  .item-price-container {
+  .item-price-container,
+  .item-seller-container {
     margin: 15px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
+  }
 
+  .item-price-container {
     button {
       padding: 0px 2px;
       border: none;
@@ -63,6 +67,18 @@
       mat-icon {
         color: #fff;
       }
+    }
+  }
+
+  .item-seller-container {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+
+    .seller-name,
+    .seller-email,
+    .seller-phone {
+      color: $secondary-text-color;
     }
   }
 }

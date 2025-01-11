@@ -4,9 +4,25 @@
   </div>
   <div class="item-title text-ellipsis">{{ item.name }}</div>
   <div class="item-description text-ellipsis">{{ item.description }}</div>
-  <div class="item-price-container">Price: {{ item.price.toFixed(2) }} €
-    <button type="button" class="btn" title="Add to cart" (click)="addItemToCart(item)">
+  <div *ngIf="!item.isAddedToCart; else itemInCartTemplate" class="item-price-container">Price: {{ item.price.toFixed(2) }} €
+    <button type="button" class="btn" (click)="addItemToCart(item)">
       <mat-icon>add</mat-icon>
     </button>
   </div>
+  <ng-template #itemInCartTemplate>
+    <div class="item-seller-container">
+      <div>
+        <strong>Seller</strong>: 
+        <span class="seller-name">{{ item.seller.name }}</span>
+      </div>
+      <div>
+        <strong>Email</strong>: 
+        <span class="seller-email">{{ item.seller.email }}</span>
+      </div>
+      <div>
+        <strong>Phone</strong>: 
+        <span class="seller-phone">{{ item.seller.phone }}</span>
+      </div>
+    </div>
+  </ng-template>
 </div>

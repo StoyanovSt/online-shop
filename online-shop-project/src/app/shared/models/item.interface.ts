@@ -8,4 +8,5 @@ export interface Item {
   seller: Seller;
   price: number;
   isPublic: boolean;
+  isAddedToCart: boolean;
 }

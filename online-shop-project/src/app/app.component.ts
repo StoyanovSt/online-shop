@@ -13,7 +13,7 @@ import { setIsAuth } from './states/auth/auth.actions';
 import { AlertComponent } from './shared/alert/alert.component';
 
 import { Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +32,6 @@ import { map, tap } from 'rxjs/operators';
 export class AppComponent implements OnDestroy {
   private authSub: Subscription | null = null;
   private authService: AuthService = inject(AuthService);
-  private router: Router = inject(Router);
   private store = inject(Store<AppState>);
   loadingService = inject(LoadingService);
 
@@ -40,10 +39,7 @@ export class AppComponent implements OnDestroy {
     this.authSub = this.authService
       .isAuthenticated()
       .pipe(
-        tap((isAuth: boolean) => this.store.dispatch(setIsAuth({ isAuth }))),
-        map((isAuth: boolean) => {
-          if (!isAuth) this.router.navigate(['/']);
-        })
+        tap((isAuth: boolean) => this.store.dispatch(setIsAuth({ isAuth })))
       )
       .subscribe();
   }

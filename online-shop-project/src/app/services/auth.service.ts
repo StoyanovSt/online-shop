@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 
 import { JWT_KEY } from '../shared/constants/constants';
 
@@ -8,6 +8,9 @@ import { JWT_KEY } from '../shared/constants/constants';
 })
 export class AuthService {
   public isAuthenticated(): Observable<boolean> {
-    return of<boolean>(Boolean(localStorage.getItem(JWT_KEY)));
+    return of<boolean>(!!localStorage.getItem(JWT_KEY))
+      .pipe(
+        delay(500)
+      );
   }
 }

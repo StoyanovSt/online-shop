@@ -4,4 +4,9 @@
   </div>
   <div class="item-title text-ellipsis">{{ item.name }}</div>
   <div class="item-description text-ellipsis">{{ item.description }}</div>
+  <div class="item-price-container">Price: {{ item.price.toFixed(2) }} €
+    <button type="button" class="btn" title="Add to cart" (click)="addItemToCart(item)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>

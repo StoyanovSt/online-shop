@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 
 import { authReducer } from './states/auth/auth.reducer';
+import { cartReducer } from './states/cart/cart.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore(),
     provideState({ name: 'authState', reducer: authReducer }),
+    provideState({ name: 'cartState', reducer: cartReducer }),
   ],
 };

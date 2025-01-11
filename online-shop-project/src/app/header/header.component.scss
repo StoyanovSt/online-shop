@@ -28,9 +28,14 @@
     justify-content: flex-end;
   }
 
-  .user-account {
+  .user-account,
+  .cart {
     font-size: 1.2rem;
     font-weight: bold;
     margin-right: 1rem;
+  }
+
+  .cart {
+    display: flex;
   }
 }

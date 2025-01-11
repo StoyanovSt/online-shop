@@ -1,5 +1,10 @@
 <div class="home-wrapper">
   @for (item of (items$ | async); track item.id) {
-  <app-item-component class="item" [item]="item" (itemId)="onAddItemToCart($event)"></app-item-component>
+  <app-item-component
+    class="item"
+    [item]="item"
+    (addedItemId)="onAddItemToCart($event)"
+    (removedItem)="onRemoveItemFromCart($event)"
+  ></app-item-component>
   }
 </div>

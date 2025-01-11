@@ -20,4 +20,10 @@ export class HomeComponent {
       map((items: Item[]) => items.filter((item: Item) => item.id !== itemId))
     );
   }
+
+  onRemoveItemFromCart(item: Item): void {
+    this.items$ = this.items$.pipe(
+      map((items: Item[]) => [...items, item])
+    );
+  }
 }

@@ -1,5 +1,10 @@
 <div class="cart-wrapper">
+  <div class="total-price">
+    Total price: {{ (totalPrice$ | async)?.toFixed(2) }}
+  </div>
+  <div class="items-container">
     @for (item of items$ | async; track item.id) {
-        <app-item-component [item]="item"></app-item-component>
+    <app-item-component [item]="item" class="item"></app-item-component>
     }
+  </div>
 </div>

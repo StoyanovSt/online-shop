@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { Item } from '../../models/item.interface';
 import { AppState } from '../../../states/app.state';
-import { addItem } from '../../../states/cart/cart.actions';
+import { addItem, removeItem } from '../../../states/cart/cart.actions';
 
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
@@ -17,12 +17,20 @@ import { CommonModule } from '@angular/common';
 })
 export class ItemComponent {
   @Input({ required: true }) item!: Item;
-  @Output() itemId = new EventEmitter<string>();
+  @Output() addedItemId = new EventEmitter<string>();
+  @Output() removedItem = new EventEmitter<Item>();
+
   private store = inject(Store<AppState>);
 
   addItemToCart(item: Item): void {
     item.isAddedToCart = true;
-    this.itemId.emit(item.id);
     this.store.dispatch(addItem({ item }));
+    this.addedItemId.emit(item.id);
+  }
+
+  removeFromCart(item: Item): void {
+    item.isAddedToCart = false;
+    this.store.dispatch(removeItem({ id: item.id }));
+    this.removedItem.emit(item);
   }
 }

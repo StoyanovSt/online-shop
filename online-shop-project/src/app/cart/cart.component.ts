@@ -7,15 +7,23 @@ import { selectItems } from '../states/cart/cart.selector';
 import { ItemComponent } from '../shared/components/item/item.component';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Component({
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
   standalone: true,
-  imports: [CommonModule, ItemComponent]
+  imports: [CommonModule, ItemComponent],
 })
 export class CartComponent {
   private store = inject(Store<AppState>);
   items$: Observable<Item[]> = this.store.select(selectItems);
+  totalPrice$ = this.items$.pipe(
+    map((items: Item[]) =>
+      items.reduce((acc: number, item: Item) => {
+        acc += item.price;
+        return acc;
+      }, 0)
+    )
+  );
 }

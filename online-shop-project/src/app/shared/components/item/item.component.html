@@ -23,6 +23,9 @@
         <strong>Phone</strong>: 
         <span class="seller-phone">{{ item.seller.phone }}</span>
       </div>
+        <button type="button" class="btn remove-item-btn" (click)="removeFromCart(item)">
+          <mat-icon>remove</mat-icon>
+        </button>
     </div>
   </ng-template>
 </div>

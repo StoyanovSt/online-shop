@@ -12,10 +12,23 @@ $secondary-text-color: #666;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin: 25px;
   padding-bottom: 25px;
+  position: relative;
 
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  button {
+    padding: 0px 2px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    background-color: rgba($color: $secondary-color, $alpha: 0.5);
+
+    mat-icon {
+      color: #fff;
+    }
   }
 
   .item-image-container {
@@ -56,29 +69,24 @@ $secondary-text-color: #666;
     justify-content: space-between;
   }
 
-  .item-price-container {
-    button {
-      padding: 0px 2px;
-      border: none;
-      background-color: transparent;
-      display: flex;
-      background-color: rgba($color: $secondary-color, $alpha: 0.5);
-
-      mat-icon {
-        color: #fff;
-      }
-    }
-  }
-
   .item-seller-container {
     display: flex;
     flex-direction: column;
     font-weight: 400;
+    margin-top: 1rem;
 
     .seller-name,
     .seller-email,
     .seller-phone {
       color: $secondary-text-color;
+    }
+
+    .remove-item-btn {
+      background-color: $error-color;
+      margin: 0;
+      position: absolute;
+      bottom: 25px;
+      right: 15px;
     }
   }
 }

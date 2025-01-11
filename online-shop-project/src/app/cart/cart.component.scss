@@ -1,11 +1,26 @@
+@import "../shared/styles/colors.scss";
+
 .cart-wrapper {
   width: 100%;
   padding: 12px 0px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
+  flex-direction: column;
 
-  .item {
+  .total-price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $text-color;
+    margin: 0 25px;
+    width: fit-content;
+  }
+
+  .items-container {
     display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+    .item {
+      display: flex;
+    }
   }
 }
